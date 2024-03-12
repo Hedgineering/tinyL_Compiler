@@ -28,9 +28,36 @@ class Instruction:
         critical=False,
     ):
         self.opcode = OpCode(opcode)  # Ensure opcode is an instance of OpCode
-        self.field1 = field1
-        self.field2 = field2
-        self.field3 = field3
+
+        if self.opcode == OpCode.LOAD:
+            self.field1 = int(field1)
+            self.field2 = str(field2)
+            self.field3 = None
+        elif self.opcode == OpCode.LOADI:
+            self.field1 = int(field1)
+            self.field2 = int(field2)
+            self.field3 = None
+        elif self.opcode == OpCode.STORE:
+            self.field1 = str(field1)
+            self.field2 = int(field2)
+            self.field3 = None
+        elif self.opcode in [
+            OpCode.ADD,
+            OpCode.SUB,
+            OpCode.MUL,
+            OpCode.AND,
+            OpCode.OR,
+        ]:
+            self.field1 = int(field1)
+            self.field2 = int(field2)
+            self.field3 = int(field3)
+        elif self.opcode in [OpCode.READ, OpCode.WRITE]:
+            self.field1 = str(field1)
+            self.field2 = None
+            self.field3 = None
+        else: # Unreachable
+            print("Illegal instruction")
+
         self.prev = prev  # Previous Instruction instance
         self.next = next  # Next Instruction instance
         self.critical = critical

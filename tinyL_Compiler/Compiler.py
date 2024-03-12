@@ -66,3 +66,8 @@ def next_token():
         error("No content to parse, content is None")
     token_idx += 1
     token = content[token_idx]
+
+def code_gen(opcode: OpCode, field1: int, field2: int | None = None, field3: int | None = None):
+
+    instr = Instruction(opcode, field1, field2, field3)
+
