@@ -232,6 +232,9 @@ def main() -> int:
     global outfile
     outfile = "tinyL.out"
 
+    # Clear the file content before each test
+    open(outfile, "w").close()
+
     print("------------------------------------------------")
     print("CS314 compiler for tinyL")
     print("------------------------------------------------")
