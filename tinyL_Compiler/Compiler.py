@@ -107,35 +107,35 @@ def expr():
     global token
     reg, left_reg, right_reg = None, None, None
 
-    if token == '+':
+    if token == "+":
         next_token()
         left_reg = expr()
         right_reg = expr()
         reg = next_register()
         code_gen(OpCode.ADD, reg, left_reg, right_reg)
         return reg
-    elif token == '-':
+    elif token == "-":
         next_token()
         left_reg = expr()
         right_reg = expr()
         reg = next_register()
         code_gen(OpCode.SUB, reg, left_reg, right_reg)
         return reg
-    elif token == '*':
+    elif token == "*":
         next_token()
         left_reg = expr()
         right_reg = expr()
         reg = next_register()
         code_gen(OpCode.MUL, reg, left_reg, right_reg)
         return reg
-    elif token == '&':
+    elif token == "&":
         next_token()
         left_reg = expr()
         right_reg = expr()
         reg = next_register()
         code_gen(OpCode.AND, reg, left_reg, right_reg)
         return reg
-    elif token == '|':
+    elif token == "|":
         next_token()
         left_reg = expr()
         right_reg = expr()
@@ -155,13 +155,13 @@ def assign():
     global token
     identifier = token
 
-    next_token() # skip identifier
+    next_token()  # skip identifier
 
-    if token != '=':
+    if token != "=":
         error(f"Symbol {token} unknown")
         sys.exit(1)
-    
-    next_token() # skip =
+
+    next_token()  # skip =
 
     expr_result_reg = expr()
     code_gen(OpCode.STORE, identifier, expr_result_reg)
@@ -169,36 +169,36 @@ def assign():
 
 def read():
     global token
-    next_token() # skip ?
+    next_token()  # skip ?
     identifier = token
     code_gen(OpCode.READ, identifier)
-    next_token() # skip identifier
+    next_token()  # skip identifier
 
 
 def tinyL_print():
     global token
-    next_token() # skip %
+    next_token()  # skip %
     identifier = token
     code_gen(OpCode.WRITE, identifier)
-    next_token() # skip identifier
+    next_token()  # skip identifier
 
 
 def stmt():
     global token
     if is_identifier(token):
         assign()
-    elif token == '?':
+    elif token == "?":
         read()
-    elif token == '%':
+    elif token == "%":
         tinyL_print()
 
 
 def morestmts():
     global token
-    if token == ';':
+    if token == ";":
         next_token()
         stmtlist()
-    elif token == '!':
+    elif token == "!":
         next_token()
     else:
         error(f"Program error.  Current input symbol is {token}")
@@ -207,7 +207,7 @@ def morestmts():
 
 def stmtlist():
     global token
-    if is_identifier(token) or token in ['?', '%']:
+    if is_identifier(token) or token in ["?", "%"]:
         stmt()
         morestmts()
     else:
@@ -217,15 +217,11 @@ def stmtlist():
 
 def program():
     global token
-    if is_identifier(token) or token in ['?', '%']:
+    if is_identifier(token) or token in ["?", "%"]:
         stmtlist()
     else:
         error(f"Program error.  Current input symbol is {token}")
         sys.exit(1)
-
-    # if token != "!":
-    #     error(f"Program error.  Current input symbol is {token}")
-    #     sys.exit(1)
 
 
 # =============
