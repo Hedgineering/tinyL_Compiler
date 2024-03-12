@@ -1,4 +1,5 @@
 import sys
+from Instruction import Instruction, OpCode, print_instruction
 
 
 def current_func_name(n: int = 0):

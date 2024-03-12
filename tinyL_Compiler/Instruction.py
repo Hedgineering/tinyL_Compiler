@@ -62,7 +62,7 @@ def print_instruction(outfile_path: str, instr: Instruction):
     This implementation assumes the Instruction class and OpCode enum are defined according to the
     provided specifications, with appropriate attributes and enum members.
     """
-    with open(outfile_path, mode="+a") as outfile:
+    with open(outfile_path, mode="a") as outfile:
         if not outfile:
             raise ValueError("File error")
         if instr:
