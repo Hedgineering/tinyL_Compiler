@@ -6,8 +6,8 @@ class RunCompilerUnitTests(unittest.TestCase):
     def __init__(self, methodName: str = "RunCompilerUnitTests") -> None:
         super().__init__(methodName)
         self.invalid_digits = [-5, -3, 10, 11, 35]
-        self.valid_identifiers = "abcde"
-        self.invalid_identifiers = "fghijklmnopqrstuvwxyz"
+        self.valid_identifiers = "abcdef"
+        self.invalid_identifiers = "ghijklmnopqrstuvwxyz"
 
     def test_is_identifier(self):
         for c in self.valid_identifiers:

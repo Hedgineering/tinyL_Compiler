@@ -46,7 +46,7 @@ def to_digit(c: str) -> int:
 
 
 def is_identifier(c: str):
-    return c in ["a", "b", "c", "d", "e"]
+    return c in ["a", "b", "c", "d", "e", "f"]
 
 
 def read_input(filepath):
